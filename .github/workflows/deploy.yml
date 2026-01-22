@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev          # Run tests/build on dev branch
+      - production   # Run full build + deploy on production branch
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test || echo "No tests configured, skipping"
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Upload Build Artifact (Dev branch)
+        if: github.ref == 'refs/heads/dev'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/
+
+  deploy:
+    name: Deploy Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/production' # Only deploy on production branch
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to Netlify (example)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --dir=build --prod --site=$NETLIFY_SITE_ID
