@@ -31,10 +31,10 @@ jobs:
 
       - name: Upload Build Artifact (Dev branch)
         if: github.ref == 'refs/heads/dev'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
-          path: build/
+            name: build
+            path: build/
 
   deploy:
     name: Deploy Production
