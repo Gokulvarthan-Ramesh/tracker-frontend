@@ -2,7 +2,7 @@ import React from "react";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gradient-to-br from-gray-950 via-gray-950/98 to-gray-900/90 min-h-screen">
       <header className="mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
       </header>
