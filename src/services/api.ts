@@ -1,14 +1,23 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!BASE_URL) {
+  throw new Error("VITE_API_BASE_URL is missing");
+}
+
 const api = axios.create({
-  baseURL: "http://192.168.100.123:8000/api/v1"
+  baseURL: BASE_URL,
 });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
+
 export default api;
