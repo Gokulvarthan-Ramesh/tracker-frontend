@@ -241,7 +241,7 @@ export default function MainLayout() {
           flex-1 overflow-y-auto bg-gradient-to-br from-gray-950 via-gray-950 to-slate-950/90
           scrollbar-thin scrollbar-thumb-gray-700/40 scrollbar-track-transparent
         ">
-          <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-7 lg:px-10 py-6 lg:py-10">
+          <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-4 lg:px-4 py-4 lg:py-4">
             <Outlet />
           </div>
         </main>

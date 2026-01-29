@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
-import Study from "./pages/Study";
+import Study from "./pages/Study/Study";
 import Workout from "./pages/Workout";
 import Meals from "./pages/Meals";
 import Weight from "./pages/Weight";

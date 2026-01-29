@@ -26,7 +26,8 @@ const Login = () => {
 
     try {
       const res = await api.post('/login', { ...form, rememberMe });
-      localStorage.setItem('token', res.data.token);
+      console.log('login',res?.data?.data?.token)
+      localStorage.setItem('token', res?.data?.data?.token);
       navigate('/', { replace: true });
     } catch (err: any) {
         console.log(err?.response);
